@@ -1,0 +1,7 @@
+{
+    'template_name': {
+        'base_dir': '/foo/bar/',
+        'sub_dirs': ['dir1/', 'dir2/', 'dir2/another_level/'],
+        'files': ['dir_file.txt', 'dir1/subdir_file.txt']
+    }
+}

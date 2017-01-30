@@ -1,6 +1,7 @@
 # Templatized Directory Generator
 
-Generate new directory structure from JSON template, using arguments passed to command for unique naming
+Read defined templates from JSON configuration file, generate the
+defined directory/file structure on disk.
 
 ## Usage
 ```
@@ -16,10 +17,14 @@ optional arguments:
   -h, --help  show this help message and exit
 ```
 
+## Creating Templates
+Simply move or copy templates.json.example to templates.json in the program directory, and modify as necessary. Paths are built using string concatenation, so only base_dir should an absolute path. If no path is specified as base_dir in a template definition, dir_name and all sub_dirs/files will be created in the current directory.
+
 ## Example JSON (./templates.json)
 ```
 {
     "template": {
+        "base_dir": "/home/miliarch/my-dir-name"
         "sub_dirs": [
             "test1/",
             "test1/level2/",

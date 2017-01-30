@@ -1,7 +1,17 @@
 {
-    'template_name': {
-        'base_dir': '/foo/bar/',
-        'sub_dirs': ['dir1/', 'dir2/', 'dir2/another_level/'],
-        'files': ['dir_file.txt', 'dir1/subdir_file.txt']
-    }
+    "template": {
+        "sub_dirs": [
+            "test1/",
+            "test1/level2/",
+            "test2/",
+            "test3/",
+            "test4/"
+        ],
+        "files": [
+            "test1/level2_file.txt",
+            "test1/level2/level3_file.txt",
+            "test3/level2_file.txt",
+            "level1_file.txt"
+        ]
+    },
 }

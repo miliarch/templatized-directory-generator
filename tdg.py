@@ -1,20 +1,32 @@
 #!/usr/bin/env python3
 ''' Templatized Directory Generator
+Read defined templates from JSON configuration file, generate the
+defined directory/file structure on disk.
 
 
+Author: Marcus Bowman
+File name: tdg.py
+Version: 0.1
+Date created: 01/29/2017
+Date last modified: 01/29/2017
+Python Version: 3.5.2
+OS Support: Linux, OS X
+License: MIT
 '''
 import argparse
 import json
 import os
 import sys
+from pathlib import Path
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+EXEC_DIR = os.path.abspath(os.getcwd())
+BASE_DIR = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 TEMPLATES_FILENAME = '{0}/templates.json'.format(BASE_DIR)
 
 def exception_exit(help_str):
     """ Exit on fatal exception, printing help string """
     print(help_str)
-    exit(2)
+    sys.exit(2)
 
 
 def import_config_json(filename):
@@ -67,21 +79,50 @@ def select_template(template_name):
     return template
 
 
-def set_parent_dir():
-    pass
+def create_sub_dirs(sub_dirs):
+    for sub_dir in sub_dirs:
+        os.mkdir(sub_dir)
+        print(path_add_str(sub_dir))
+
+
+def create_files(files):
+    for file in files:
+        Path(file).touch()
+        print(path_add_str(file))
+
+
+def path_add_str(full_path):
+    return '+ {}'.format(full_path)
+
+
+def update_paths(dir_name, template):
+    """ Make all paths in template absolute """
+    dir_name = '{0}/'.format(dir_name)
+
+    # Append dir_name to the base_dir defined in template
+    try:
+        template['base_dir'] += dir_name
+    except KeyError:
+        template['base_dir'] = '{0}/{1}'.format(EXEC_DIR, dir_name)
+
+    for i,sub_dir in enumerate(template['sub_dirs']):
+        template['sub_dirs'][i] = template['base_dir'] + sub_dir
+
+    for i,file in enumerate(template['files']):
+        template['files'][i] = template['base_dir'] + file
+
+    return template
 
 
 def main(args):
     args = parse_args(args)
-    template = select_template(args.template)
+    template = update_paths(args.dir_name, select_template(args.template))
 
-    dir_name = '{0}/'.format(args.dir_name)
-    try:
-        template['base_dir'] += dir_name
-    except KeyError:
-        template['base_dir'] = dir_name
+    # Get to business
+    os.mkdir(template['base_dir'])
+    create_sub_dirs(template['sub_dirs'])
+    create_files(template['files'])
 
-    print(template)
 
 if __name__ == '__main__':
     main(sys.argv)

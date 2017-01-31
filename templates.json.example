@@ -1,5 +1,5 @@
 {
-    "template": {
+    "template1": {
         "sub_dirs": [
             "test1/",
             "test1/level2/",
@@ -14,4 +14,8 @@
             "level1_file.txt"
         ]
     },
+    "template2": {
+        "sub_dirs": ["test1/"],
+        "files": ["file.txt", "test1/file.txt"]
+    }
 }

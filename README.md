@@ -23,8 +23,7 @@ Simply move or copy templates.json.example to templates.json in the program dire
 ## Example JSON (./templates.json)
 ```
 {
-    "template": {
-        "base_dir": "/home/miliarch/my-dir-name"
+    "template1": {
         "sub_dirs": [
             "test1/",
             "test1/level2/",
@@ -38,20 +37,29 @@ Simply move or copy templates.json.example to templates.json in the program dire
             "test3/level2_file.txt",
             "level1_file.txt"
         ]
+    },
+    "template2": {
+        "sub_dirs": ["test1/"],
+        "files": ["file.txt", "test1/file.txt"]
     }
 }
 ```
 
 ## Example Run
 ```
-miliarch@localhost:~$ tdg template my-dir-name
-+ /home/miliarch/my-dir-name/test1/
-+ /home/miliarch/my-dir-name/test1/level2/
-+ /home/miliarch/my-dir-name/test2/
-+ /home/miliarch/my-dir-name/test3/
-+ /home/miliarch/my-dir-name/test4/
-+ /home/miliarch/my-dir-name/test1/level2_file.txt
-+ /home/miliarch/my-dir-name/test1/level2/level3_file.txt
-+ /home/miliarch/my-dir-name/test3/level2_file.txt
-+ /home/miliarch/my-dir-name/level1_file.txt
+miliarch@localhost:~$ tdg template1 my-dir-name1
++ /home/miliarch/my-dir-name1/test1/
++ /home/miliarch/my-dir-name1/test1/level2/
++ /home/miliarch/my-dir-name1/test2/
++ /home/miliarch/my-dir-name1/test3/
++ /home/miliarch/my-dir-name1/test4/
++ /home/miliarch/my-dir-name1/test1/level2_file.txt
++ /home/miliarch/my-dir-name1/test1/level2/level3_file.txt
++ /home/miliarch/my-dir-name1/test3/level2_file.txt
++ /home/miliarch/my-dir-name1/level1_file.txt
+
+PS C:\> python tdg.py template2 my-dir-name2
++ C:\/my-dir-name2/test1/
++ C:\/my-dir-name2/file.txt
++ C:\/my-dir-name2/test1/file.txt
 ```

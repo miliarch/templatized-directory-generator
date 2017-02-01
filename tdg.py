@@ -15,13 +15,12 @@ License: MIT
 '''
 import argparse
 import json
-import os
 import sys
 from pathlib import Path, PurePath
 
-EXEC_DIR = os.path.realpath(os.getcwd())
-BASE_DIR = os.path.realpath(os.path.dirname(__file__))
-TEMPLATES_FILENAME = str(PurePath(BASE_DIR, 'templates.json'))
+EXEC_DIR = Path.cwd().resolve()
+BASE_DIR = Path(__file__).parents[0]
+TEMPLATES_FILENAME = PurePath(BASE_DIR, 'templates.json')
 
 def exception_exit(help_str):
     """ Exit on fatal exception, printing help string """
@@ -67,7 +66,7 @@ def parse_args(args):
 
 
 def select_template(template_name):
-    templates = import_config_json(TEMPLATES_FILENAME)
+    templates = import_config_json(str(TEMPLATES_FILENAME))
 
     try:
         template = templates[template_name]
@@ -81,7 +80,7 @@ def select_template(template_name):
 
 def create_sub_dirs(sub_dirs):
     for sub_dir in sub_dirs:
-        os.mkdir(sub_dir)
+        Path(sub_dir).mkdir()
         print(path_add_str(sub_dir))
 
 
@@ -119,7 +118,7 @@ def main(args):
     template = update_paths(args.dir_name, select_template(args.template))
 
     # Get to business
-    os.mkdir(template['base_dir'])
+    Path(template['base_dir']).mkdir()
     create_sub_dirs(template['sub_dirs'])
     create_files(template['files'])
 

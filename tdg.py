@@ -57,7 +57,7 @@ def parse_args(args):
     parser.add_argument('template',
         help='Template to use for DIR structure')
     parser.add_argument('dir_name', 
-        help='Name for parent directory in base DIR defined by template')
+        help='Name for parent directory in template defined base DIR')
     args = parser.parse_args()
 
     return args

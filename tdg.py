@@ -17,11 +17,11 @@ import argparse
 import json
 import os
 import sys
-from pathlib import Path
+from pathlib import Path, PurePath
 
-EXEC_DIR = os.path.abspath(os.getcwd())
-BASE_DIR = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
-TEMPLATES_FILENAME = '{0}/templates.json'.format(BASE_DIR)
+EXEC_DIR = os.path.realpath(os.getcwd())
+BASE_DIR = os.path.realpath(os.path.dirname(__file__))
+TEMPLATES_FILENAME = str(PurePath(BASE_DIR, 'templates.json'))
 
 def exception_exit(help_str):
     """ Exit on fatal exception, printing help string """
@@ -96,10 +96,10 @@ def path_add_str(full_path):
 
 
 def update_paths(dir_name, template):
-    """ Make all paths in template absolute """
+    """ Update all paths in template to absolute values """
     dir_name = '{0}/'.format(dir_name)
 
-    # Append dir_name to the base_dir defined in template
+    # Update base_dir
     try:
         template['base_dir'] += dir_name
     except KeyError:

@@ -6,7 +6,7 @@ defined directory/file structure on disk.
 
 Author: Marcus Bowman
 File name: tdg.py
-Version: 0.1
+Version: 0.2
 Date created: 01/29/2017
 Date last modified: 01/29/2017
 Python Version: 3.5.2

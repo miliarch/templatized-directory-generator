@@ -23,13 +23,13 @@ BASE_DIR = Path(__file__).parents[0]
 TEMPLATES_FILENAME = PurePath(BASE_DIR, 'templates.json')
 
 def exception_exit(help_str):
-    """ Exit on fatal exception, printing help string """
+    """Exit on fatal exception, printing help string"""
     print(help_str)
     sys.exit(2)
 
 
 def import_config_json(filename):
-    """ Import data from JSON configuration file, return dict """
+    """Import data from JSON configuration file, return dict"""
     try:
         with open(filename, encoding='utf-8') as file:
             config = json.loads(file.read())
@@ -43,9 +43,7 @@ def import_config_json(filename):
 
 
 def parse_args(args):
-    """ Take from argparse, match to defined template in templates.json,
-    return relevant template as dict
-    """
+    """Parse and return passed arguments"""
 
     # Found this bit posted by unutbu here: http://stackoverflow.com/a/4042861
     class Parser(ArgumentParser):
@@ -66,6 +64,9 @@ def parse_args(args):
 
 
 def select_template(template_name):
+    """Import templates.json as dict, return specified template_name if
+    it exists in the dict, exit if it does not exist
+    """
     templates = import_config_json(str(TEMPLATES_FILENAME))
 
     try:
@@ -78,12 +79,13 @@ def select_template(template_name):
     return template
 
 
-def path_add_str(full_path):
-    return '+ {}'.format(full_path)
+def path_add_str(path_):
+    """Format path_ for console printing"""
+    return '+ {}'.format(path_)
 
 
 def update_paths(dir_name, template):
-    """ Update all paths in template dict to absolute values """
+    """Update all paths in template dict to absolute values"""
     try:
         template['base_dir'] = [PurePath(template['base_dir'], dir_name)]
     except KeyError:
@@ -99,16 +101,18 @@ def update_paths(dir_name, template):
 
 
 def write_paths(paths, is_file=False):
+    """Create directories or files in paths list, print path_add_str """
     for p in paths:
         Path(p).touch() if is_file else Path(p).mkdir()
         print(path_add_str(p))
 
 
 def main(args):
+    # Set the pins up
     args = parse_args(args)
     template = update_paths(args.dir_name, select_template(args.template))
 
-    # Get to business
+    # Knock them down
     write_paths(template['base_dir'], is_file=False)
     write_paths(template['sub_dirs'], is_file=False)
     write_paths(template['files'], is_file=True)

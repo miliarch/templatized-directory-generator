@@ -96,19 +96,17 @@ def path_add_str(full_path):
 
 def update_paths(dir_name, template):
     """ Update all paths in template to absolute values """
-    dir_name = '{0}/'.format(dir_name)
-
     # Update base_dir
     try:
-        template['base_dir'] += dir_name
+        template['base_dir'] = PurePath(template['base_dir'], dir_name)
     except KeyError:
-        template['base_dir'] = '{0}/{1}'.format(EXEC_DIR, dir_name)
+        template['base_dir'] = PurePath(EXEC_DIR, dir_name)
 
     for i,sub_dir in enumerate(template['sub_dirs']):
-        template['sub_dirs'][i] = template['base_dir'] + sub_dir
+        template['sub_dirs'][i] = PurePath(template['base_dir'], sub_dir)
 
     for i,file in enumerate(template['files']):
-        template['files'][i] = template['base_dir'] + file
+        template['files'][i] = PurePath(template['base_dir'], file)
 
     return template
 

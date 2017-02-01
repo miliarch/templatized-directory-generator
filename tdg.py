@@ -19,7 +19,7 @@ from argparse import ArgumentParser
 from pathlib import Path, PurePath
 
 EXEC_DIR = Path.cwd().resolve()
-BASE_DIR = Path(__file__).parents[0]
+BASE_DIR = Path(__file__).resolve().parents[0]
 TEMPLATES_FILENAME = PurePath(BASE_DIR, 'templates.json')
 
 def exception_exit(help_str):

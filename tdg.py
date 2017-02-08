@@ -22,6 +22,7 @@ EXEC_DIR = Path.cwd().resolve()
 BASE_DIR = Path(__file__).resolve().parents[0]
 TEMPLATES_FILENAME = PurePath(BASE_DIR, 'templates.json')
 
+
 def exception_exit(help_str):
     """Exit on fatal exception, printing help string"""
     print(help_str)
@@ -37,7 +38,6 @@ def import_config_json(filename):
         exception_exit('JSON config file not found:\n{}'.format(err))
     except json.decoder.JSONDecodeError:
         exception_exit('File contents not JSON format:\n{}'.format(filename))
-        
 
     return config
 
@@ -54,9 +54,11 @@ def parse_args(args):
 
     parser = Parser(
         description='Create DIRs from templates defined in templates.json')
-    parser.add_argument('template',
+    parser.add_argument(
+        'template',
         help='Template to use for DIR structure')
-    parser.add_argument('dir_name', 
+    parser.add_argument(
+        'dir_name',
         help='Name for parent directory in template defined base DIR')
     args = parser.parse_args()
 
@@ -91,10 +93,10 @@ def update_paths(dir_name, template):
     except KeyError:
         template['base_dir'] = [PurePath(EXEC_DIR, dir_name)]
 
-    for i,sub_dir in enumerate(template['sub_dirs']):
+    for i, sub_dir in enumerate(template['sub_dirs']):
         template['sub_dirs'][i] = PurePath(template['base_dir'][0], sub_dir)
 
-    for i,file in enumerate(template['files']):
+    for i, file in enumerate(template['files']):
         template['files'][i] = PurePath(template['base_dir'][0], file)
 
     return template

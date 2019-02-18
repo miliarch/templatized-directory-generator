@@ -8,7 +8,7 @@ directory/file structure of the user's specified template on the filesystem.
 __author__ = "Marcus Bowman"
 __email__ = "miliarch.mb@gmail.com"
 __license__ = "MIT"
-__version__ = "0.3"
+__version__ = "1.0"
 __status__ = "Development"
 
 import json

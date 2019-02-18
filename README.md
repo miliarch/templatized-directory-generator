@@ -52,11 +52,27 @@ The following values can be used in template definition to reflect arguments pas
 | !dir_name! | Use the dir_name passed in arguments at run time as the file/directory name | `"sub_dirs": ["!dir_name!", "tests"], "files": ["!dir_name!.py", "!dir_name!/__init__.py", "README.md", "LICENSE"]`|
 
 ## Example
-This is a simple example of the "Investigative work" use case mentioned above.
+This is a simple example of templates definition and program use, covering the use case mentioned above.
 
 ### templates.json
 ```
 {
+    "python_basic": {
+        "base_dir": "/projects",
+        "sub_dirs": [
+            "!dir_name!/",
+            "docs",
+            "tests"
+        ],
+        "files": [
+            "!dir_name!/__init__.py",
+            "run.py",
+            "README.md",
+            "LICENSE",
+            ".gitignore",
+            ".gitattributes"
+        ]
+    },
     "support_case": {
         "base_dir": "/cases",
         "sub_dirs": [
@@ -73,8 +89,20 @@ This is a simple example of the "Investigative work" use case mentioned above.
 }
 ```
 
-### Program run
+### Running the program
 ```
+$ ./tdg.py python_basic new_proj1
++ /projects/new_proj1
++ /projects/new_proj1/new_proj1
++ /projects/new_proj1/docs
++ /projects/new_proj1/tests
++ /projects/new_proj1/new_proj1/__init__.py
++ /projects/new_proj1/run.py
++ /projects/new_proj1/README.md
++ /projects/new_proj1/LICENSE
++ /projects/new_proj1/.gitignore
++ /projects/new_proj1/.gitattributes
+
 $ ./tdg.py support_case 12345_description
 + /cases/12345_description
 + /cases/12345_description/screenshots
@@ -87,15 +115,35 @@ $ ./tdg.py support_case 12345_description
 
 ### Filesystem representation
 ```
+$ ls -lnGXR /projects/new_proj1
+/projects/new_proj1:
+total 0
+drwxrwxrwx 1 1000 512 Feb 17 18:17 docs
+-rw-rw-rw- 1 1000   0 Feb 17 18:17 LICENSE
+drwxrwxrwx 1 1000 512 Feb 17 18:17 new_proj1
+drwxrwxrwx 1 1000 512 Feb 17 18:17 tests
+-rw-rw-rw- 1 1000   0 Feb 17 18:17 README.md
+-rw-rw-rw- 1 1000   0 Feb 17 18:17 run.py
+
+/projects/new_proj1/docs:
+total 0
+
+/projects/new_proj1/new_proj1:
+total 0
+-rw-rw-rw- 1 1000 0 Feb 17 18:17 __init__.py
+
+/projects/new_proj1/tests:
+total 0
+
 $ ls -lnGXR /cases/12345_description
 /cases/12345_description:
 total 0
-drwxrwxrwx 1 1000 512 Feb 17 14:48 logs
-drwxrwxrwx 1 1000 512 Feb 17 14:48 screenshots
--rw-rw-rw- 1 1000   0 Feb 17 14:48 problem.txt
--rw-rw-rw- 1 1000   0 Feb 17 14:48 scratch_notes.txt
--rw-rw-rw- 1 1000   0 Feb 17 14:48 solution.txt
--rw-rw-rw- 1 1000   0 Feb 17 14:48 timeline.txt
+drwxrwxrwx 1 1000 512 Feb 17 18:17 logs
+drwxrwxrwx 1 1000 512 Feb 17 18:17 screenshots
+-rw-rw-rw- 1 1000   0 Feb 17 18:17 problem.txt
+-rw-rw-rw- 1 1000   0 Feb 17 18:17 scratch_notes.txt
+-rw-rw-rw- 1 1000   0 Feb 17 18:17 solution.txt
+-rw-rw-rw- 1 1000   0 Feb 17 18:17 timeline.txt
 
 /cases/12345_description/logs:
 total 0

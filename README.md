@@ -32,10 +32,26 @@ optional arguments:
   -h, --help  show this help message and exit
 ```
 
-## Creating Templates
-Simply move or copy templates.json.example to templates.json in the program directory, and modify as necessary. Only base_dir should be an absolute path, all other paths are relative.
+## Defining Templates
+Templates can be defined by crafting JSON within the template object using the fields below:
 
-If no path is specified as base_dir in a template definition, dir_name and all sub_dirs/files will be created in the user's current working directory.
+| Field | Data Type | Description | Example |
+| --- | --- | --- | --- |
+| base_dir | String | Absolute file system path of the parent directory. If no base_dir is specified for a template, the user's current working directory will be used. | `"base_dir": "/home/user/projects"` |
+| sub_dirs | Array (Strings) | List of relative sub-directory paths to be created under base_dir/dir_name/ | `"sub_dirs": ["subdir1", "subdir1/subdir2"]` |
+| files | Array (Strings) | List of relative file  paths to be created under base_dir/dir_name/ | `"files": ["file.txt", "subdir1/file.txt"]` |
+
+A full example template can be found below.
+
+### Special values
+
+The following values can be used in template definition to reflect arguments passed by the user at the command line:
+
+| Value | Meaning |
+| --- | --- |
+| !dir_name! | Use the provided dir_name as the file/directory name |
+
+Note: This is not yet implemented, but is very next on the list!
 
 ## Example
 This is a simple example of the "Investigative work" use case mentioned above.

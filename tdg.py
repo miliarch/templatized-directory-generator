@@ -43,7 +43,7 @@ def import_config_json(filename):
 
 
 def parse_args(args):
-    """Parse and return passed arguments"""
+    """ Parse and return passed arguments """
 
     # Found this bit posted by unutbu here: http://stackoverflow.com/a/4042861
     class Parser(ArgumentParser):
@@ -52,13 +52,14 @@ def parse_args(args):
             self.print_help()
             sys.exit(2)
 
-    description = 'Create DIRs from templates defined in templates.json'
+    description = 'Create directory structure based on templates '
+    description += 'defined in templates.json'
     parser = Parser(description=description)
 
-    help_str = 'Template to use for DIR structure'
+    help_str = 'Template to use for directory structure'
     parser.add_argument('template', help=help_str)
 
-    help_str = 'Name for parent directory in template defined base DIR'
+    help_str = 'Name for new directory'
     parser.add_argument('dir_name', help=help_str)
 
     args = parser.parse_args()
@@ -67,7 +68,7 @@ def parse_args(args):
 
 
 def select_template(template_name):
-    """Import templates.json as dict, return specified template_name if
+    """ Import templates.json as dict, return specified template_name if
     it exists in the dict, exit if it does not exist
     """
     templates = import_config_json(str(TEMPLATES_FILENAME))
@@ -84,12 +85,12 @@ def select_template(template_name):
 
 
 def path_add_str(path_):
-    """Format path_ for console printing"""
+    """ Format path_ for console printing """
     return '+ {}'.format(path_)
 
 
 def update_paths(dir_name, template):
-    """Update all paths in template dict to absolute values"""
+    """ Update all paths in template dict to absolute values """
     try:
         template['base_dir'] = [PurePath(template['base_dir'], dir_name)]
     except KeyError:
@@ -105,7 +106,7 @@ def update_paths(dir_name, template):
 
 
 def write_paths(paths, is_file=False):
-    """Create directories or files in paths list, print path_add_str """
+    """ Create directories or files in paths list, print path_add_str """
     for p in paths:
         Path(p).touch() if is_file else Path(p).mkdir()
         print(path_add_str(p))

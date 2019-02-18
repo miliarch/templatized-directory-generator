@@ -20,13 +20,13 @@ Examples of use cases in programming:
 
 ## Usage
 ```
-usage: tdg [-h] template dir_name
+usage: tdg.py [-h] template dir_name
 
-Create DIRs from templates defined in templates.json
+Create directory structure based on templates defined in templates.json
 
 positional arguments:
-  template    Template to use for creating DIR structure
-  dir_name    Name for parent directory in template defined base DIR
+  template    Template to use for directory structure
+  dir_name    Name for new directory
 
 optional arguments:
   -h, --help  show this help message and exit

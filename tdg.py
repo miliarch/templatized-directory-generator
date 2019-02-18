@@ -105,7 +105,7 @@ def update_paths(dir_name, template):
     return template
 
 
-def write_paths(paths, is_file=False):
+def write_paths(paths, is_file):
     """ Create directories or files in paths list, print path_add_str """
     for p in paths:
         Path(p).touch() if is_file else Path(p).mkdir()

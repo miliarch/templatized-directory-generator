@@ -47,11 +47,9 @@ A full example template can be found below.
 
 The following values can be used in template definition to reflect arguments passed by the user at the command line:
 
-| Value | Meaning |
-| --- | --- |
-| !dir_name! | Use the provided dir_name as the file/directory name |
-
-Note: This is not yet implemented, but is very next on the list!
+| Value | Meaning | Example |
+| --- | --- | --- |
+| !dir_name! | Use the dir_name passed in arguments at run time as the file/directory name | `"sub_dirs": ["!dir_name!", "tests"], "files": ["!dir_name!.py", "!dir_name!/__init__.py", "README.md", "LICENSE"]`|
 
 ## Example
 This is a simple example of the "Investigative work" use case mentioned above.

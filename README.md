@@ -115,39 +115,22 @@ $ ./tdg.py support_case 12345_description
 
 ### Filesystem representation
 ```
-$ ls -lnGXR /projects/new_proj1
-/projects/new_proj1:
-total 0
-drwxrwxrwx 1 1000 512 Feb 17 18:17 docs
--rw-rw-rw- 1 1000   0 Feb 17 18:17 LICENSE
-drwxrwxrwx 1 1000 512 Feb 17 18:17 new_proj1
-drwxrwxrwx 1 1000 512 Feb 17 18:17 tests
--rw-rw-rw- 1 1000   0 Feb 17 18:17 README.md
--rw-rw-rw- 1 1000   0 Feb 17 18:17 run.py
+$ tree --dirsfirst /projects/new_proj1
+/projects/new_proj1
+├── docs
+├── new_proj1
+│   └── __init__.py
+├── tests
+├── LICENSE
+├── README.md
+└── run.py
 
-/projects/new_proj1/docs:
-total 0
-
-/projects/new_proj1/new_proj1:
-total 0
--rw-rw-rw- 1 1000 0 Feb 17 18:17 __init__.py
-
-/projects/new_proj1/tests:
-total 0
-
-$ ls -lnGXR /cases/12345_description
-/cases/12345_description:
-total 0
-drwxrwxrwx 1 1000 512 Feb 17 18:17 logs
-drwxrwxrwx 1 1000 512 Feb 17 18:17 screenshots
--rw-rw-rw- 1 1000   0 Feb 17 18:17 problem.txt
--rw-rw-rw- 1 1000   0 Feb 17 18:17 scratch_notes.txt
--rw-rw-rw- 1 1000   0 Feb 17 18:17 solution.txt
--rw-rw-rw- 1 1000   0 Feb 17 18:17 timeline.txt
-
-/cases/12345_description/logs:
-total 0
-
-/cases/12345_description/screenshots:
-total 0
+$ tree --dirsfirst /cases/12345_description
+/cases/12345_description
+├── logs
+├── screenshots
+├── problem.txt
+├── scratch_notes.txt
+├── solution.txt
+└── timeline.txt
 ```

@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
-''' Templatized Directory Generator
-Read defined templates from JSON configuration file, generate the
-defined directory/file structure on disk.
+""" Templatized Directory Generator
 
+Reads defined templates from JSON configuration file, generates the defined
+directory/file structure of the user's specified template on the filesystem.
+"""
 
-Author: Marcus Bowman
-File name: tdg.py
-Version: 0.2
-Date created: 01/29/2017
-Date last modified: 01/29/2017
-Python Version: 3.5.2
-OS Support: Linux, OS X
-License: MIT
-'''
+__author__ = "Marcus Bowman"
+__email__ = "miliarch.mb@gmail.com"
+__license__ = "MIT"
+__version__ = "0.3"
+__status__ = "Development"
+
 import json
 import sys
 from argparse import ArgumentParser

@@ -33,7 +33,7 @@ optional arguments:
 ```
 
 ## Defining Templates
-Templates can be defined by crafting JSON within the template object using the fields below:
+Templates can be defined by crafting JSON using the fields below within objects named for each template in the `templates.json` configuration file:
 
 | Field | Type | Description | Example |
 | --- | --- | --- | --- |

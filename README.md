@@ -52,7 +52,7 @@ The following values can be used in template definition to reflect arguments pas
 | !dir_name! | Use the dir_name passed in arguments at run time as the file/directory name | `"sub_dirs": ["!dir_name!", "tests"], "files": ["!dir_name!.py", "!dir_name!/__init__.py", "README.md", "LICENSE"]`|
 
 ## Example
-This is a simple example of templates definition and program use, covering the use case mentioned above.
+This is a simple example of templates definition and program use, covering the use cases mentioned above.
 
 ### templates.json
 ```

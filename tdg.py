@@ -33,9 +33,11 @@ def import_config_json(filename):
         with open(filename, encoding='utf-8') as file:
             config = json.loads(file.read())
     except FileNotFoundError as err:
-        exception_exit('JSON config file not found:\n{}'.format(err))
-    except json.decoder.JSONDecodeError:
-        exception_exit('File contents not JSON format:\n{}'.format(filename))
+        help_str = 'JSON config file not found:\n{}'.format(err)
+        exception_exit(help_str)
+    except json.decoder.JSONDecodeError as err:
+        help_str = 'JSON decode error:\n{}\n{}'.format(err, filename)
+        exception_exit(help_str)
 
     return config
 
@@ -73,9 +75,10 @@ def select_template(template_name):
     try:
         template = templates[template_name]
     except KeyError as err:
-        exception_exit('Specified template not defined in "{0}":\n{1}'.format(
-            TEMPLATES_FILENAME,
-            err))
+        help_str = 'Template {0} not defined in:\n{1}'.format(
+            err,
+            TEMPLATES_FILENAME)
+        exception_exit(help_str)
 
     return template
 

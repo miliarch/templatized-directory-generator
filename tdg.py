@@ -89,17 +89,40 @@ def path_add_str(path_):
     return '+ {}'.format(path_)
 
 
+def replace_variable_in_value(value, variable, replacement):
+    """ Replace variable in value string with replacement string
+    """
+    return value.replace(variable, replacement)
+
+
 def update_paths(dir_name, template):
     """ Update all paths in template dict to absolute values """
+
+    # Define special_value used for string replacement in path updates
+    special_value = '!dir_name!'
+
+    # Update base_dir path
     try:
+        # Use the value specified in config file if present
         template['base_dir'] = [PurePath(template['base_dir'], dir_name)]
     except KeyError:
+        # Use users current working dir (EXEC_DIR) if base_dir not in template
         template['base_dir'] = [PurePath(EXEC_DIR, dir_name)]
 
+    # Update paths for all included sub_dirs
     for i, sub_dir in enumerate(template['sub_dirs']):
+        # Replace special_value with dir_name in sub_dir
+        sub_dir = replace_variable_in_value(sub_dir, special_value, dir_name)
+
+        # Add path to template dict sub_dirs list
         template['sub_dirs'][i] = PurePath(template['base_dir'][0], sub_dir)
 
+    # Update paths for all included files
     for i, file in enumerate(template['files']):
+        # Replace special_value with dir_name in file
+        file = replace_variable_in_value(file, special_value, dir_name)
+
+        # Add path to template dict files list
         template['files'][i] = PurePath(template['base_dir'][0], file)
 
     return template

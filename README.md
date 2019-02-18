@@ -35,11 +35,11 @@ optional arguments:
 ## Defining Templates
 Templates can be defined by crafting JSON within the template object using the fields below:
 
-| Field | Data Type | Description | Example |
+| Field | Type | Description | Example |
 | --- | --- | --- | --- |
 | base_dir | String | Absolute file system path of the parent directory. If no base_dir is specified for a template, the user's current working directory will be used. | `"base_dir": "/home/user/projects"` |
-| sub_dirs | Array (Strings) | List of relative sub-directory paths to be created under base_dir/dir_name/ | `"sub_dirs": ["subdir1", "subdir1/subdir2"]` |
-| files | Array (Strings) | List of relative file  paths to be created under base_dir/dir_name/ | `"files": ["file.txt", "subdir1/file.txt"]` |
+| sub_dirs | Array of Strings | List of relative sub-directory path strings to be created under base_dir/dir_name/ | `"sub_dirs": ["subdir1", "subdir1/subdir2"]` |
+| files | Array of Strings | List of relative file paths strings to be created under base_dir/dir_name/ | `"files": ["file.txt", "subdir1/file.txt"]` |
 
 A full example template can be found below.
 

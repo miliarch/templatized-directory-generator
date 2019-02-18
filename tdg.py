@@ -8,7 +8,7 @@ directory/file structure of the user's specified template on the filesystem.
 __author__ = "Marcus Bowman"
 __email__ = "miliarch.mb@gmail.com"
 __license__ = "MIT"
-__version__ = "1.0"
+__version__ = "1.0.1"
 __status__ = "Development"
 
 import json
@@ -118,12 +118,12 @@ def update_paths(dir_name, template):
         template['sub_dirs'][i] = PurePath(template['base_dir'][0], sub_dir)
 
     # Update paths for all included files
-    for i, file in enumerate(template['files']):
-        # Replace special_value with dir_name in file
-        file = replace_variable_in_value(file, special_value, dir_name)
+    for i, file_ in enumerate(template['files']):
+        # Replace special_value with dir_name in file_
+        file_ = replace_variable_in_value(file_, special_value, dir_name)
 
         # Add path to template dict files list
-        template['files'][i] = PurePath(template['base_dir'][0], file)
+        template['files'][i] = PurePath(template['base_dir'][0], file_)
 
     return template
 
@@ -141,9 +141,9 @@ def main(args):
     template = update_paths(args.dir_name, select_template(args.template))
 
     # Knock them down
-    write_paths(template['base_dir'], is_file=False)
-    write_paths(template['sub_dirs'], is_file=False)
-    write_paths(template['files'], is_file=True)
+    write_paths(template['base_dir'], False)
+    write_paths(template['sub_dirs'], False)
+    write_paths(template['files'], True)
 
 
 if __name__ == '__main__':

@@ -50,14 +50,15 @@ def parse_args(args):
             self.print_help()
             sys.exit(2)
 
-    parser = Parser(
-        description='Create DIRs from templates defined in templates.json')
-    parser.add_argument(
-        'template',
-        help='Template to use for DIR structure')
-    parser.add_argument(
-        'dir_name',
-        help='Name for parent directory in template defined base DIR')
+    description = 'Create DIRs from templates defined in templates.json'
+    parser = Parser(description=description)
+
+    help_str = 'Template to use for DIR structure'
+    parser.add_argument('template', help=help_str)
+
+    help_str = 'Name for parent directory in template defined base DIR'
+    parser.add_argument('dir_name', help=help_str)
+
     args = parser.parse_args()
 
     return args
